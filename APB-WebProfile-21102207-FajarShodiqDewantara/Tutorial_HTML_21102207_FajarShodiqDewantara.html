@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Profile - Fajar Dewantara</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           DASAR TAMPILAN & DARK MODE
+           ========================================= */
+        body {
+            padding: 40px 15px; 
+            color: #e0e0e0; 
+            background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-bottom: 80px; 
+        }
+
+        .text-muted {
+            color: #a0a0a0 !important;
+        }
+
+        .main-container {
+            background-color: rgba(15, 15, 15, 0.85); 
+            border: 1px solid rgba(0, 168, 255, 0.1); 
+            border-radius: 25px; 
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
+            backdrop-filter: blur(12px); 
+        }
+
+        h1, h2, h3, h4, h5 {
+            color: #ffffff; 
+        }
+
+        .text-accent {
+            color: #00a8ff; 
+        }
+
+        .border-bottom-custom {
+            border-bottom: 2px solid rgba(0, 168, 255, 0.3) !important; 
+        }
+
+        /* =========================================
+           SIDEBAR & LOGO
+           ========================================= */
+        .box-border {
+            border: 1px solid rgba(0, 168, 255, 0.2); 
+            border-radius: 20px; 
+            background-color: rgba(30, 30, 30, 0.5); 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+        }
+
+        .logo-wrapper {
+            text-align: center;
+            cursor: pointer;
+            padding: 20px;
+            transition: all 0.4s ease; 
+        }
+
+        .logo-wrapper:hover {
+            background-color: rgba(0, 168, 255, 0.1); 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px rgba(0, 168, 255, 0.15);
+        }
+
+        .logo-wrapper img {
+            max-width: 120px;
+            border: 3px solid #00a8ff; 
+            padding: 3px; 
+            transition: transform 0.3s ease;
+        }
+
+        .logo-wrapper:hover img {
+            transform: scale(1.05); 
+        }
+
+        /* =========================================
+           NAVIGASI (MENU TERSEMBUNYI)
+           ========================================= */
+        .sidebar-nav {
+            display: none;
+            margin-top: 20px;
+            border-top: 2px dashed rgba(0, 168, 255, 0.3);
+            padding-top: 15px;
+            text-align: left;
+        }
+
+        .sidebar-nav.show {
+            display: block;
+            animation: fadeInDown 0.5s ease forwards; 
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-link {
+            color: #e0e0e0;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 12px; 
+            transition: all 0.3s ease;
+            margin-bottom: 5px;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            background-color: #00a8ff; 
+            padding-left: 20px; 
+        }
+
+        /* =========================================
+           BANNER & KOTAK API
+           ========================================= */
+        .top-banner {
+            border: none;
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-banner img {
+            width: 100%;
+            height: auto; 
+            display: block;
+            object-fit: contain; 
+        }
+
+        .api-container {
+            border: 1px solid rgba(0, 168, 255, 0.2);
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%); 
+            border-radius: 20px;
+            color: #e0e0e0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .api-container:hover {
+            transform: scale(1.02); 
+            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.1);
+        }
+
+        /* =========================================
+           GALERI
+           ========================================= */
+        .gallery-item {
+            border-radius: 15px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 120px; 
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease; 
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 8px 20px rgba(0, 168, 255, 0.4); 
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1); 
+        }
+
+        /* =========================================
+           FLOATING FOOTER
+           ========================================= */
+        .floating-footer {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%); 
+            width: 90%;
+            max-width: 800px;
+            background-color: rgba(20, 20, 20, 0.85); 
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            border-radius: 30px; 
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.4);
+            z-index: 1000; 
+            transition: all 0.3s ease;
+        }
+
+        .floating-footer:hover {
+            background-color: rgba(25, 25, 25, 0.95);
+            box-shadow: 0 -5px 30px rgba(0, 168, 255, 0.2); 
+        }
+
+        .floating-footer p {
+            color: #e0e0e0;
+            font-size: 0.95rem;
+        }
+
+        .floating-footer a {
+            color: #00a8ff; 
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        .floating-footer a:hover {
+            color: #ffffff; 
+        }
+
+        /* =========================================
+           EFEK KURSOR NGETIK
+           ========================================= */
+        .cursor {
+            display: inline-block;
+            color: #00a8ff; 
+            font-weight: bold;
+            margin-left: 2px;
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* =========================================
+           EFEK KABUT (SCROLL & HOVER REVEAL)
+           ========================================= */
+        .focus-wrapper {
+            display: block;
+        }
+
+        .focus-item {
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
+            padding: 15px 20px;
+            border-radius: 15px;
+            border: 1px solid transparent;
+            filter: blur(8px); 
+            opacity: 0.3; 
+            transform: scale(0.95); 
+        }
+
+        .focus-item:hover,
+        .focus-item.active-focus {
+            filter: blur(0); 
+            opacity: 1; 
+            background-color: rgba(30, 30, 30, 0.6); 
+            border: 1px solid rgba(0, 168, 255, 0.4); 
+            transform: scale(1); 
+            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.1); 
+            z-index: 10;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container main-container position-relative">
+        <div class="row">
+            
+            <div class="col-md-3 sticky-top align-self-start" style="top: 40px; z-index: 100;">
+                
+                <div class="box-border logo-wrapper mb-4" id="logoToggle" title="Klik untuk membuka/menutup menu">
+                    <img src="assets/image/logo.png" class="rounded-circle img-fluid mb-2 shadow-sm" alt="Foto Profil">
+                    
+                    <div class="sidebar-nav" id="hiddenNav">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="#profile">Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="api-container p-3 text-center shadow-sm rounded-4">
+                    <h6 class="mb-2 border-bottom pb-2 border-secondary fw-bold text-white">Quote Motivasi</h6>
+                    <div id="api-content" class="mt-2">
+                        <div class="spinner-border spinner-border-sm text-light" role="status"></div>
+                        <span class="ms-2 text-light" style="font-size: 0.85rem;">Memuat...</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-9 mt-4 mt-md-0">
+                
+                <div id="profile" class="mb-4 pb-4 border-bottom-custom">
+                    <div class="row align-items-center">
+                        
+                        <div class="col-md-5 mb-3 mb-md-0">
+                            <div class="top-banner mb-0">
+                                <img src="assets/image/ChatGPT Image Mar 8, 2026, 01_53_28 AM.png" alt="Banner Profile">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-7">
+                            <h2 class="fw-bold"><span id="typing-name"></span><span class="cursor">|</span></h2>
+                            <h5 class="text-accent">Software Development & Data Analysis</h5>
+                            <p class="mt-3 text-muted">
+                                Halo! Saya berfokus di bidang Software Development & Data Analysis. Saya memiliki minat besar pada Web Development, Desktop Application, dan Data Science, serta memiliki ketertarikan penelitian di area Social Network Analysis dan Optical Character Recognition.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="focus-wrapper mt-2">
+                            
+                            <div id="about" class="focus-item mb-4">
+                                <h4 class="border-bottom-custom pb-2">About Me</h4>
+                                <p class="text-muted">Saya adalah seorang Software Developer profesional yang memiliki spesialisasi dalam mentransformasi proses manual menjadi sistem digital yang efisien. Salah satu proyek strategis yang telah saya selesaikan adalah pengembangan sistem pelaporan berbasis web untuk Dinas Perikanan Kabupaten Cilacap. Saya memiliki kemahiran teknis dalam berbagai bahasa pemrograman, mencakup Java dan JavaScript, serta kompetensi mendalam dalam manajemen basis data menggunakan MySQL. Dengan rekam jejak pengembangan solusi digital yang bervariasi—mulai dari aplikasi sistem billing hingga sistem monitoring otomatis—saya senantiasa berfokus pada penciptaan produk yang fungsional, responsif, dan didasarkan pada analisis data yang akurat.</p>
+                            </div>
+
+                            <div id="education" class="focus-item mb-4">
+                                <h4 class="border-bottom-custom pb-2">Education</h4>
+                                <ul class="list-unstyled text-muted">
+                                    <li class="mb-3">
+                                        <strong class="text-white fs-5">Telkom University Purwokerto</strong> <span class="badge bg-primary ms-2">2021 - Sekarang</span><br>
+                                        Program Studi S1 Teknik Informatika<br>
+                                    </li>
+                                    <li>
+                                        <strong class="text-white fs-5">SMK Telkom Purwokerto</strong> <span class="badge bg-secondary ms-2">2018 - 2021</span><br>
+                                        Rekayasa Perangkat Lunak
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="skills" class="focus-item mb-4">
+                                <h4 class="border-bottom-custom pb-2">Skills</h4>
+                                <ul class="text-muted">
+                                    <li class="mb-2"><strong class="text-white">Programming & Web Dev:</strong> Java, Python, HTML, CSS, JavaScript (Vanilla), Bootstrap 5.3, MySQL, dan Sistem CRUD.</li>
+                                    <li class="mb-2"><strong class="text-white">Data Science & AI:</strong> Data Analysis (SNA, Graph Analysis), Machine Learning (Neural Networks, Backpropagation, Image Processing, OCR), Numpy, Matplotlib, Scikit-learn, Algoritma Louvain.</li>
+                                    <li><strong class="text-white">Tools & Documentations:</strong> LaTeX (BibTeX), NetBeans, Git/Google Drive, dbdiagram.io, draw.io.</li>
+                                </ul>
+                            </div>
+
+                            <div id="portfolio" class="focus-item mb-4">
+                                <h4 class="border-bottom-custom pb-2">Portfolio / Project</h4>
+                                <ul class="text-muted">
+                                    <li class="mb-2"><strong class="text-accent">Billiard & Cafe Billing System:</strong> Aplikasi desktop berbasis Java yang mengintegrasikan manajemen meja biliar dan kafe.</li>
+                                    <li class="mb-2"><strong class="text-accent">Fishing Spot Profile Website:</strong> Website informasi profil lokasi memancing dan penyewaan alat.</li>
+                                    <li class="mb-2"><strong class="text-accent">SNA Project:</strong> Riset analisis data menggunakan Louvain Algorithm.</li>
+                                    <li class="mb-2"><strong class="text-accent">OCR Research:</strong> Penelitian AI untuk digitalisasi dokumen.</li>
+                                    <li class="mb-2"><strong class="text-accent">Digitalisasi Laporan Nelayan:</strong> Website pelaporan hasil tangkapan di Dinas Perikanan Cilacap.</li>
+                                </ul>
+                            </div>
+
+                            <div id="gallery" class="focus-item mb-4">
+                                <h4 class="border-bottom-custom pb-2">Gallery</h4>
+                                <div class="row g-3 mt-2">
+                                    <div class="col-6 col-md-4"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80" alt="Galeri 1"></div></div>
+                                    <div class="col-6 col-md-4"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80" alt="Galeri 2"></div></div>
+                                    <div class="col-6 col-md-4"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80" alt="Galeri 3"></div></div>
+                                    <div class="col-6 col-md-4"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&w=500&q=80" alt="Galeri 4"></div></div>
+                                    <div class="col-6 col-md-4"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=500&q=80" alt="Galeri 5"></div></div>
+                                    <div class="col-6 col-md-4"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=500&q=80" alt="Galeri 6"></div></div>
+                                </div>
+                            </div>
+
+                        </div> 
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-footer" id="contact">
+        <p class="mb-0">
+            <strong>Contact Me:</strong> 
+            <a href="mailto:fajar.s.d1234@gmail.com">fajar.s.d1234@gmail.com</a> | 
+            <a href="#">LinkedIn</a> | 
+            <a href="https://github.com/fajar1831">GitHub</a>
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. FITUR TOGGLE MENU PADA LOGO
+            const logoToggle = document.getElementById('logoToggle');
+            const hiddenNav = document.getElementById('hiddenNav');
+
+            logoToggle.addEventListener('click', function() {
+                hiddenNav.classList.toggle('show');
+            });
+
+            // 2. FITUR FETCH DATA API (Quote Motivasi)
+            const apiContainer = document.getElementById('api-content');
+            
+            fetch('https://dummyjson.com/quotes/random')
+                .then(response => response.json())
+                .then(data => {
+                    apiContainer.innerHTML = `
+                        <blockquote class="blockquote mb-0">
+                            <p class="fs-6 fst-italic text-light">"${data.quote}"</p>
+                            <footer class="blockquote-footer mt-3" style="color: #00a8ff; font-weight: bold;">
+                                ${data.author}
+                            </footer>
+                        </blockquote>
+                    `;
+                })
+                .catch(error => {
+                    apiContainer.innerHTML = '<p class="text-danger mb-0">Gagal mengambil data.</p>';
+                    console.error('Error fetching API:', error);
+                });
+
+            // 3. FITUR EFEK KETIK (TYPING EFFECT) PADA NAMA
+            const nameText = "Fajar Shodiq Dewantara"; 
+            const typingElement = document.getElementById('typing-name');
+            let charIndex = 0;
+
+            function typeEffect() {
+                if (charIndex < nameText.length) {
+                    typingElement.innerHTML += nameText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeEffect, 100); 
+                }
+            }
+            setTimeout(typeEffect, 500);
+
+            // 4. EFEK HILANGKAN BLUR SAAT DI-SCROLL (SCROLL REVEAL)
+            const focusItems = document.querySelectorAll('.focus-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 
+            };
+
+            const focusObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active-focus');
+                    } else {
+                        entry.target.classList.remove('active-focus');
+                    }
+                });
+            }, observerOptions);
+
+            focusItems.forEach(item => {
+                focusObserver.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
